@@ -1,3 +1,8 @@
+__all__ = ['assemble_stiffness_1d',
+           'assemble_rhs_1d',
+           'assemble_stiffness_2d',
+           'assemble_rhs_2d'
+]
 
 #==============================================================================
 def assemble_stiffness_1d(nelements, degree, spans, basis, weights, points, matrix):
