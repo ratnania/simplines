@@ -5,6 +5,7 @@
 import numpy as np
 
 from .bsplines import basis_funs
+from .bsplines import find_span
 
 __all__ = ['point_on_bspline_curve',
            'point_on_nurbs_curve',

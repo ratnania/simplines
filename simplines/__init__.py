@@ -4,8 +4,12 @@ from simplines import spaces
 from simplines import linalg
 from simplines import quadratures
 from simplines import utilities
+from simplines import gallery
 
-__all__ = ['bsplines', 'cad', 'spaces', 'linalg', 'quadratures', 'utilities']
+__all__ = ['bsplines', 'cad',
+           'spaces', 'linalg',
+           'quadratures', 'utilities',
+           'gallery']
 
 from simplines.bsplines import ( find_span,
                                  basis_funs,
@@ -63,3 +67,8 @@ from simplines.quadratures import gauss_legendre
 
 from simplines.utilities import ( plot_field_1d,
                                   plot_field_2d )
+
+from simplines.gallery import ( assemble_stiffness_1d,
+                                assemble_rhs_1d,
+                                assemble_stiffness_2d,
+                                assemble_rhs_2d )

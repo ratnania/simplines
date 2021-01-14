@@ -905,7 +905,47 @@ def _refinement_matrix_one_stage(t, p, knots):
 def hrefinement_matrix(ts, p, knots):
     """
     computes the refinement matrix corresponding to the insertion of a given list of knots
+
+    Parameters
+    ----------
+    ts: np.array
+        array containing the knots to be inserted
+
+    p: int
+        spline degree
+
+    knots : array_like
+        Knots sequence.
+
+    Returns
+    -------
+    mat : np.array[:,:]
+        h-refinement matrix
+
+    Examples
+    --------
+    >>> import numpy as np
+    >>> from simplines import make_knots
+    >>> from simplines import hrefinement_matrix
+    >>> grid = np.linspace(0.,1.,5)
+    >>> degree = 2
+    >>> knots = make_knots(grid, degree, periodic=False)
+    >>> ts    = np.array([0.1, 0.2, 0.4, 0.5, 0.7, 0.8])
+    >>> hrefinement_matrix(ts, p, knots)
+    array([[1.  , 0.  , 0.  , 0.  , 0.  , 0.  ],
+           [0.6 , 0.4 , 0.  , 0.  , 0.  , 0.  ],
+           [0.12, 0.72, 0.16, 0.  , 0.  , 0.  ],
+           [0.  , 0.6 , 0.4 , 0.  , 0.  , 0.  ],
+           [0.  , 0.2 , 0.8 , 0.  , 0.  , 0.  ],
+           [0.  , 0.  , 0.7 , 0.3 , 0.  , 0.  ],
+           [0.  , 0.  , 0.5 , 0.5 , 0.  , 0.  ],
+           [0.  , 0.  , 0.1 , 0.9 , 0.  , 0.  ],
+           [0.  , 0.  , 0.  , 0.6 , 0.4 , 0.  ],
+           [0.  , 0.  , 0.  , 0.4 , 0.6 , 0.  ],
+           [0.  , 0.  , 0.  , 0.  , 0.8 , 0.2 ],
+           [0.  , 0.  , 0.  , 0.  , 0.  , 1.  ]])
     """
+
     m = len(ts)
     n = len(knots) - p - 1
     out = np.eye(n)
