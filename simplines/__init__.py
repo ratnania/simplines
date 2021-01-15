@@ -4,10 +4,11 @@ from simplines import spaces
 from simplines import linalg
 from simplines import quadratures
 from simplines import utilities
+from simplines import api
 
 __all__ = ['bsplines', 'cad',
            'spaces', 'linalg',
-           'quadratures', 'utilities']
+           'quadratures', 'utilities', 'api']
 
 from simplines.bsplines import ( find_span,
                                  basis_funs,
@@ -65,3 +66,5 @@ from simplines.quadratures import gauss_legendre
 
 from simplines.utilities import ( plot_field_1d,
                                   plot_field_2d )
+
+from simplines.api import (assemble_matrix, assemble_vector)
