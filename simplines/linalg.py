@@ -176,6 +176,17 @@ class StencilVector( object ):
     def pads(self):
         return self._space.pads
 
+    def from_array( self, V, x ):
+        if V.dim == 2:
+            # TODO improve
+            n1,n2 = V.nbasis
+            for i1 in range(n1):
+                for i2 in range(n2):
+                    self[i1,i2] = x[i1,i2]
+
+        else:
+            raise NotImplementedError('only dim==2 is available')
+
     # ...
     def toarray( self ):
         """ return the local array without the padding"""
