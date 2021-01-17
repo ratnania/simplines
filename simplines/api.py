@@ -1,10 +1,13 @@
 import numpy as np
+from functools import partial
+
+from pyccel.epyccel import epyccel
 
 from .linalg import StencilMatrix
 from .linalg import StencilVector
 from .spaces import TensorSpace
 
-__all__ = ['assemble_matrix', 'assemble_vector', 'assemble_scalar', 'apply_dirichlet']
+__all__ = ['assemble_matrix', 'assemble_vector', 'assemble_scalar', 'compile_kernel', 'apply_dirichlet']
 
 #==============================================================================
 def assemble_matrix(core, V, fields=None, out=None):
@@ -99,6 +102,23 @@ def assemble_scalar(core, V, fields=None):
         args += [x._data for x in fields]
 
     return core( *args )
+
+#==============================================================================
+def compile_kernel(core, arity, pyccel=True):
+    assert(arity in [0,1,2])
+
+    if pyccel:
+        core = epyccel(core)
+
+    if arity == 2:
+        return partial(assemble_matrix, core)
+
+    elif arity == 1:
+        return partial(assemble_vector, core)
+
+    elif arity == 0:
+        return partial(assemble_scalar, core)
+
 
 #==============================================================================
 def apply_dirichlet(V, x):
