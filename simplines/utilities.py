@@ -1,8 +1,12 @@
 import numpy as np
+from functools import reduce
 from matplotlib import pyplot as plt
 
 from .cad import point_on_bspline_curve
 from .cad import point_on_bspline_surface
+
+
+__all__ = ['plot_field_1d', 'plot_field_2d', 'prolongation_matrix']
 
 # ==========================================================
 def plot_field_1d(knots, degree, u, nx=101, color='b'):
@@ -48,3 +52,26 @@ def plot_field_2d(knots, degrees, u, nx=101, ny=101):
             Q[i1,i2,:] = point_on_bspline_surface(T1, T2, P, x, y)
     X,Y = np.meshgrid(xs,ys)
     plt.contourf(X, Y, Q[:,:,0])
+
+# ==========================================================
+def prolongation_matrix(VH, Vh):
+    # TODO not working for duplicated internal knots
+
+    # ... TODO check that VH is included in Vh
+    # ...
+
+    # ...
+    mats = []
+    for Wh, WH in zip(Vh.spaces, VH.spaces):
+        ths = Wh.knots
+        tHs = WH.knots
+        ts = set(ths) - set(tHs)
+        ts = np.array(list(ts))
+
+        M = hrefinement_matrix( ts, Wh.degree, tHs )
+        mats.append(csr_matrix(M))
+    # ...
+
+    M = reduce(kron, (m for m in mats))
+
+    return M

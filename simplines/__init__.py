@@ -65,6 +65,7 @@ from simplines.linalg import ( StencilVectorSpace,
 from simplines.quadratures import gauss_legendre
 
 from simplines.utilities import ( plot_field_1d,
-                                  plot_field_2d )
+                                  plot_field_2d,
+                                  prolongation_matrix )
 
 from simplines.api import (assemble_matrix, assemble_vector, assemble_scalar, apply_dirichlet)
