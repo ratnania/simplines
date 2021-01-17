@@ -1,9 +1,11 @@
 import numpy as np
 from functools import reduce
 from matplotlib import pyplot as plt
+from scipy.sparse import kron, csr_matrix
 
 from .cad import point_on_bspline_curve
 from .cad import point_on_bspline_surface
+from .bsplines import hrefinement_matrix
 
 
 __all__ = ['plot_field_1d', 'plot_field_2d', 'prolongation_matrix']
