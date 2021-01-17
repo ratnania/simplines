@@ -99,6 +99,10 @@ class SplineSpace(object):
     def basis(self):
         return self._basis
 
+    @property
+    def dim(self):
+        return 1
+
 # =================================================================================================
 class TensorSpace(object):
     def __init__( self, *args ):
@@ -155,6 +159,10 @@ class TensorSpace(object):
     @property
     def basis(self):
         return [V.basis for V in self.spaces]
+
+    @property
+    def dim(self):
+        return sum([V.dim for V in self.spaces])
 
 # =================================================================================================
 def test_1d():
