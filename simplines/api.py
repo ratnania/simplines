@@ -123,7 +123,23 @@ def compile_kernel(core, arity, pyccel=True):
 #==============================================================================
 def apply_dirichlet(V, x):
     if isinstance(x, StencilMatrix):
-        if V.dim == 2:
+        if V.dim == 1:
+            n1 = V.nbasis
+
+            # ... resetting bnd dof to 0
+            x[0,:] = 0.
+            x[n1-1,:] = 0.
+            # ...
+
+            # boundary x = 0
+            x[0,0] = 1.
+
+            # boundary x = 1
+            x[n1-1,0] = 1.
+
+            return x
+
+        elif V.dim == 2:
             n1,n2 = V.nbasis
 
             # ... resetting bnd dof to 0
@@ -147,8 +163,19 @@ def apply_dirichlet(V, x):
 
             return x
 
+        else:
+            raise NotImplementedError('Only 1d and 2d are available')
+
     elif isinstance(x, StencilVector):
-        if V.dim == 2:
+        if V.dim == 1:
+            n1 = V.nbasis
+
+            x[0] = 0.
+            x[n1-1] = 0.
+
+            return x
+
+        elif V.dim == 2:
             n1,n2 = V.nbasis
 
             x[0,:] = 0.
@@ -157,6 +184,9 @@ def apply_dirichlet(V, x):
             x[:,n2-1] = 0.
 
             return x
+
+        else:
+            raise NotImplementedError('Only 1d and 2d are available')
 
     else:
         raise TypeError('Expecting StencilMatrix or StencilVector')
