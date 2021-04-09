@@ -150,16 +150,16 @@ def apply_dirichlet(V, x):
             # ...
 
             # boundary x = 0
-            x[0,:,0,:] = 1.
+            x[0,:,0,0] = 1.
 
             # boundary x = 1
-            x[n1-1,:,0,:] = 1.
+            x[n1-1,:,0,0] = 1.
 
             # boundary y = 0
-            x[:,0,:,0] = 1.
+            x[:,0,0,0] = 1.
 
             # boundary y = 1
-            x[:,n2-1,:,0] = 1.
+            x[:,n2-1,0,0] = 1.
 
             return x
 
