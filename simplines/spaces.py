@@ -16,7 +16,7 @@ __all__ = ['SplineSpace', 'TensorSpace']
 
 # =================================================================================================
 class SplineSpace(object):
-    def __init__(self, degree, nelements=None, grid=None, nderiv=1,
+    def __init__(self, degree, nelements=None, grid=None, nderiv=2,
                  periodic=False, normalization=False):
 
         if (nelements is None) and (grid is None):
