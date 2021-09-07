@@ -6,6 +6,7 @@ from scipy.sparse import kron, csr_matrix
 from .cad import point_on_bspline_curve
 from .cad import point_on_bspline_surface
 from .bsplines import hrefinement_matrix
+from .spaces import TensorSpace
 
 
 __all__ = ['plot_field_1d', 'plot_field_2d', 'prolongation_matrix']
@@ -63,8 +64,22 @@ def prolongation_matrix(VH, Vh):
     # ...
 
     # ...
+    spaces_H = []
+    if isinstance(VH, TensorSpace):
+        spaces_H = VH.spaces
+    else:
+        spaces_H = [VH]
+
+    spaces_h = []
+    if isinstance(Vh, TensorSpace):
+        spaces_h = Vh.spaces
+    else:
+        spaces_h = [Vh]
+    # ...
+
+    # ...
     mats = []
-    for Wh, WH in zip(Vh.spaces, VH.spaces):
+    for Wh, WH in zip(spaces_h, spaces_H):
         ths = Wh.knots
         tHs = WH.knots
         ts = set(ths) - set(tHs)
