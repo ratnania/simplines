@@ -188,6 +188,12 @@ class StencilVector( object ):
             for i1 in range(n1):
                 for i2 in range(n2):
                     self[i1,i2] = x[i1,i2]
+        elif V.dim == 3:
+            n1,n2,n3 = V.nbasis
+            for i1 in range(n1):
+                for i2 in range(n2):
+                   for i3 in range(n3):
+                      self[i1,i2,i3] = x[i1,i2,i3]
 
         else:
             raise NotImplementedError('only 1d and 2d are available')
